@@ -53,7 +53,7 @@ export default function Home() {
         />
       </section>
 
-      {/* CTA */}
+    
       <section className="bg-gray-900 text-white py-20 rounded-xl text-center">
         <h2 className="text-4xl font-bold mb-6">
           Elevate Your Restaurant Experience
