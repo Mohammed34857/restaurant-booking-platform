@@ -9,21 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "framer-motion": "^12.29.2",
     "next": "16.1.4",
-=======
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.7",
-    "@mui/material-nextjs": "^7.3.7",
-    "next": "^16.1.6",
->>>>>>> b170b8cd23c901516d1920e6c4c58d0ac39ef1c2
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
