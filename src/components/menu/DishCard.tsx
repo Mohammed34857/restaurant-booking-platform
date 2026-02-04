@@ -1,10 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-
-import { Card, CardContent, Typography, CardActions, Button , Box } from "@mui/material";
+import { Card, CardContent, Typography, CardActions, Button, Box } from "@mui/material";
 
 type Dish = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -13,7 +11,8 @@ type Dish = {
 
 export default function DishCard({ dish }: { dish: Dish }) {
   return (
-    <Card  sx={{
+    <Card
+      sx={{
         maxWidth: 345,
         overflow: "hidden",
         transition: "0.3s",
@@ -24,18 +23,22 @@ export default function DishCard({ dish }: { dish: Dish }) {
         "&:hover img": {
           transform: "scale(1.1)",
         },
-      }}>
+      }}
+    >
       <Box sx={{ overflow: "hidden" }}>
-      <Image
-        src={dish.image}
-        alt={dish.name}
-        width={345}
-        height={180}
-        style={{ objectFit: "cover", borderTopLeftRadius: 4, borderTopRightRadius: 4 , transition: "transform 0.4s ease", height:250}}
-      />
+        <img
+          src={dish.image}
+          alt={dish.name}
+          style={{
+            width: "100%",
+            height: 250,
+            objectFit: "cover",
+            transition: "transform 0.4s ease",
+          }}
+        />
       </Box>
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h6">
           {dish.name}
         </Typography>
         <Typography variant="body2" color="text.secondary" mb={1}>
@@ -46,10 +49,10 @@ export default function DishCard({ dish }: { dish: Dish }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link href="/reservations">
-        <Button size="small" color="primary" variant="contained">
-          Order Now
-        </Button>
+        <Link href={`/menu/${dish.id}`}>
+          <Button variant="contained" fullWidth>
+            Details
+          </Button>
         </Link>
       </CardActions>
     </Card>

@@ -4,7 +4,7 @@ import HeroSection from  "@/components/Home/HeroSection"
 import FeaturesSection from "@/components/Home/FeaturesSection"
 import PopularDishesSection from "@/components/Home/PopularDishesSection"
 import CTASection from "@/components/Home/CTASection";
-import MealLookupComponent from "@/components/mealsComponent/MealLookupComponent";
+import MealLookupComponent from "@/app/meals/MealLookup";
 
 
 
@@ -16,7 +16,7 @@ export default function Home() {
       <FeaturesSection/>
       <PopularDishesSection/>
       <CTASection/>
-
+      <MealLookupComponent/>
     </div>
   );
 }

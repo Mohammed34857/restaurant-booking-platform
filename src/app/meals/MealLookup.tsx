@@ -1,7 +1,7 @@
 'use client';
 
 import { MealDetailsModel } from '@/Models/MealsDetailsModel';
-import { Button, Card, CardContent, CardMedia, Typography, Chip, Stack, Divider, Box } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Chip, Stack, Divider, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 // Define the meal model based on the API response structure

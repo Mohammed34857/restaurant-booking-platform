@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import DishCard from "@/components/menu/DishCard";
 import Grid from "@mui/material/Grid";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, TextField, Box } from "@mui/material";
 
 type Dish = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -14,41 +14,65 @@ type Dish = {
 };
 
 export default function MenuPage() {
+  const [ingredient, setIngredient] = useState("");
   const [dishes, setDishes] = useState<Dish[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
+  const fetchDishes = async (ingredient: string) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/menu?ingredient=${ingredient}`);
+      const data = await res.json();
+      setDishes(data);
+    } catch (err) {
+      console.error(err);
+      setDishes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // كل ما تغير الحرف بعد 500ms ينزل البحث
   useEffect(() => {
-    fetch("/api/menu")
-      .then((res) => res.json())
-      .then((data) => {
-        setDishes(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+    const timer = setTimeout(() => {
+      if (ingredient.trim()) fetchDishes(ingredient);
+      else setDishes([]);
+    }, 500);
 
-  if (loading)
-    return (
-      <Typography variant="h6" align="center" mt={10}>
-        Loading...
-      </Typography>
-    );
+    return () => clearTimeout(timer);
+  }, [ingredient]);
 
   return (
     <Container sx={{ py: 8 }}>
-      <Typography variant="h4" gutterBottom textAlign="center" mb={6}>
-        Our Menu
-      </Typography>
-      <Grid container spacing={4} justifyContent="center">
-        {dishes.map((dish) => (
-          <Grid item key={dish.id}>
-            <DishCard dish={dish} />
-          </Grid>
-        ))}
-      </Grid>
+      <Box mb={6} textAlign="center">
+        <Typography variant="h4" gutterBottom>
+          Our Menu
+        </Typography>
+        <TextField
+          placeholder="Search by ingredient (e.g. chicken)"
+          value={ingredient}
+          onChange={(e) => setIngredient(e.target.value)}
+          sx={{ width: "100%", maxWidth: 400 }}
+        />
+      </Box>
+
+      {loading ? (
+        <Typography variant="h6" textAlign="center">
+          Loading...
+        </Typography>
+      ) : dishes.length === 0 ? (
+        <Typography variant="h6" textAlign="center">
+          No meals found.
+        </Typography>
+      ) : (
+        <Grid container spacing={4} justifyContent="center">
+          {dishes.map((dish) => (
+            <Grid item key={dish.id}>
+              <DishCard dish={dish} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 }
