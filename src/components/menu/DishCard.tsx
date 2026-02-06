@@ -49,6 +49,11 @@ export default function DishCard({ dish }: { dish: Dish }) {
         </Typography>
       </CardContent>
       <CardActions>
+         <Link href={`/reservations?dish=${dish.name}`}>
+           <Button variant="contained" color="primary" fullWidth>
+            Order Now
+           </Button>
+        </Link>
         <Link href={`/menu/${dish.id}`}>
           <Button variant="contained" fullWidth>
             Details
