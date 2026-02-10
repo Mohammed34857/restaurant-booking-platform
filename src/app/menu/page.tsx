@@ -32,7 +32,7 @@ export default function MenuPage() {
     }
   };
 
-  // كل ما تغير الحرف بعد 500ms ينزل البحث
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (ingredient.trim()) fetchDishes(ingredient);
